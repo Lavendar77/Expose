@@ -10,6 +10,8 @@ This is the master branch for the repository. I will, later on, add more descrip
 
 **You have successfully set up your Laravel application and can proceed to build a cool web application.**
 
+## [Organizing Models](https://github.com/Lavendar77/Expose/tree/organizing-models)
+
 ---
 ## External tools
 - [MarkdownPreview for Sublime Text 3](https://facelessuser.github.io/MarkdownPreview/)
