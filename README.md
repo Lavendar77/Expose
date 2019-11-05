@@ -1,22 +1,11 @@
 # Expose
-Guide for my Laravel Applications.
+Guide for my Laravel Applications.	Guide for my Laravel Applications.
 
-## Authentication
-Let us set up the scaffold of all the routes and views needed for authentication.
+## Table of Contents
+1. [Organizing Models](https://github.com/Lavendar77/Expose/tree/organizing-models)
+2. [Authentication](https://github.com/Lavendar77/Expose/tree/authentication-setup)
 
-```
-composer require laravel/ui --dev
-
-php artisan ui vue --auth
-```
-: 
-
-### Compile scaffolding
-Run the following to compile your fresh scaffolding:
-```
-npm install
-npm run dev
-```
-
-## Test
-Run `php artisan serve`
+---	
+## External tools
+- [MarkdownPreview for Sublime Text 3](https://facelessuser.github.io/MarkdownPreview/)	- [MarkdownPreview for Sublime Text 3](https://facelessuser.github.io/MarkdownPreview/)
+: For writing and previewing markdown syntax for the *README.md* file, most especially.	: For writing and previewing markdown syntax for the *README.md* file, most especially.
