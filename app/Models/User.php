@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Traits\Models\UUID;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
