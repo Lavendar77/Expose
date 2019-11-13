@@ -1,24 +1,12 @@
 # Exposé
 Guide for my Laravel Applications.
 
-## Creating Traits
-I had to get this in place because an upcoming project needs to use UUID for its models. <br>
-Also, **Traits** are good for exporting functions/logic that can be used by multiple classes. You get more standardized and readable code by using Traits.
+## Table of Contents
+1. [Organizing Models](https://github.com/Lavendar77/Expose/tree/organizing-models)
+2. [Database Setup](https://github.com/Lavendar77/Expose/tree/database-setup)
+3. [Authentication](https://github.com/Lavendar77/Expose/tree/authentication-setup)
+4. [Using Traits](https://github.com/Lavendar77/Expose/tree/laravel-traits)
 
-However, Laravel (<= 6.0) does not come with a simple `artisan` command for creating traits. Hence, this branch.
-
-https://github.com/cedextech/trait-generator
-
-1. Install package
-```
-composer require cedextech/trait-generator --dev
-
-```
-2. Register service provider
-```
-Cedextech\TraitGenerator\ServiceProvider::class,
-```
-3. Test
-```
-php artisan make:trait TraitNqme
-```
+## Tools
+[MarkdownPreview for Sublime Text 3](https://facelessuser.github.io/MarkdownPreview/) 
+: For writing and previewing markdown syntax for the *README.md* file, most especially.
