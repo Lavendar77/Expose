@@ -6,9 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Traits\Models\UUID;
+use Illuminate\Support\Str;
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use UUID, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -36,4 +39,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function language()
+    {
+        return $this->hasOne(UserLanguage::class);
+    }
 }
