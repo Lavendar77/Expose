@@ -20,5 +20,5 @@ Cedextech\TraitGenerator\ServiceProvider::class,
 ```
 3. Test
 ```
-php artisan make:trait TraitNqme
+php artisan make:trait TraitName
 ```
