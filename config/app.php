@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Cedextech\TraitGenerator\ServiceProvider::class,
 
         /*
          * Application Service Providers...
