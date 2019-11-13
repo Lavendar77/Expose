@@ -6,9 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Traits\Models\UUID;
+
 class User extends Authenticatable
 {
-    use Notifiable;
+    use UUID, Notifiable;
 
     /**
      * The attributes that are mass assignable.
