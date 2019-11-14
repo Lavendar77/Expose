@@ -23,3 +23,19 @@ use Illuminate\Support\Facades\Schema;
 // To help during migration: increase string length to 191
 Schema::defaultStringLength(191);
 ```
+
+### Modifying Columns
+1. Install the package
+```
+composer require doctrine/dbal
+```
+2. Create a new migration
+```
+php artisan make:migration ModifyUsersTable
+```
+3. The attribute for modification:
+```php
+Schema::table('users', function (Blueprint $table) {
+    $table->string('name', 50)->change();
+});
+```
