@@ -18,3 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('mail', function () {
+	return (new App\Notifications\UserRegistered())
+                ->toMail(App\Models\User::find(1));
+});
