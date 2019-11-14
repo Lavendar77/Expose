@@ -53,21 +53,21 @@ Route::get('mail', function () {
                 ->toMail(App\Models\User::find(1));
 });
 ```
-![Default look](https://github.com/Lavendar77/Expose/tree/notifications/public/images/notifications/default.png)
+![Default look](https://github.com/Lavendar77/Expose/blob/notifications/public/images/notifications/default.png)
 
 ### Other Methods
 1. `greeting(string $message)`
 	Add a greeting to the notification.
-	![Greeting](https://github.com/Lavendar77/Expose/tree/notifications/public/images/notifications/greeting.png)
+	![Greeting](https://github.com/Lavendar77/Expose/blob/notifications/public/images/notifications/greeting.png)
 
 2. `error()`
 	Some notifications inform users of errors, such as a failed invoice payment. You may indicate that a mail message is regarding an error by calling the error method when building your message. When using the error method on a mail message, the call to action button will be red instead of blue.
-	![Error](https://github.com/Lavendar77/Expose/tree/notifications/public/images/notifications/error.png)
+	![Error](https://github.com/Lavendar77/Expose/blob/notifications/public/images/notifications/error.png)
 
 3. `from(email $email, string $name)`
 	Customizing the sender of the mail notification
-	![Customer Sender](https://github.com/Lavendar77/Expose/tree/notifications/public/images/notifications/from.png)
+	![Customer Sender](https://github.com/Lavendar77/Expose/blob/notifications/public/images/notifications/from.png)
 
 4. `subject(string $message)`
 	Add the subject of the mail
-	![Subject](https://github.com/Lavendar77/Expose/tree/notifications/public/images/notifications/subject.png)
+	![Subject](https://github.com/Lavendar77/Expose/blob/notifications/public/images/notifications/subject.png)
