@@ -3,7 +3,7 @@ Guide for my Laravel Applications.
 
 ## Table of Contents
 - [Organizing Models](https://github.com/Lavendar77/Expose/tree/organizing-models)
-- [Database Setup](https://github.com/Lavendar77/Expose/tree/database)
+- [Database Configurations](https://github.com/Lavendar77/Expose/tree/database)
 - [Authentication](https://github.com/Lavendar77/Expose/tree/authentication-setup)
 - [Using Traits](https://github.com/Lavendar77/Expose/tree/laravel-traits)
 - [Switching from Autoincrementing to UUID in Models](https://github.com/Lavendar77/Expose/tree/eloquent-uuid)
