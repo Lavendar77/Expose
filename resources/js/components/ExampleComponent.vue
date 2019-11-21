@@ -1,23 +1,24 @@
 <template>
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
+        {{ count }}
 
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
+        <input type="number" name="" v-model="count">
     </div>
 </template>
 
 <script>
+	import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
+
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        computed: {
+            count: {
+                get () {
+                    return this.$store.state.count
+                },
+                set (newCount) {
+                    this.$store.commit('updateCount', newCount)
+                }
+            }
         }
     }
 </script>
