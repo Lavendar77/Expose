@@ -8,6 +8,8 @@ Guide for my Laravel Applications.
 - [Using Traits](https://github.com/Lavendar77/Expose/tree/laravel-traits)
 - [Switching from Autoincrementing to UUID in Models](https://github.com/Lavendar77/Expose/tree/eloquent-uuid)
 - [Working with Notifications](https://github.com/Lavendar77/Expose/tree/notifications)
+- [Vuex](https://github.com/Lavendar77/Expose/tree/vuex)
+- [Laravel Passport](https://github.com/Lavendar77/Expose/tree/passport)
 
 ## Tools
 [MarkdownPreview for Sublime Text 3](https://facelessuser.github.io/MarkdownPreview/) 
