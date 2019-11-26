@@ -92,3 +92,5 @@ $token = $user->createToken('Token Name')->accessToken;
 // Creating a token with scopes...
 $token = $user->createToken('My Token', ['place-orders'])->accessToken;
 ```
+
+> Always remember, whenever you run `php artisan migrate:fresh`, be sure to run `php artisan passport:install --force` to generate new keys and store them in the database.
