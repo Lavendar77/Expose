@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         Cedextech\TraitGenerator\ServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...
