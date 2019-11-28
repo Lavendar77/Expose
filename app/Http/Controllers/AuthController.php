@@ -7,20 +7,26 @@ use Auth;
 use App\Models\User;
 
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
+        $data = $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:8'
+        ]);
+
     	$authenticate = Auth::attempt([
-    		'email' => $request->email,
-    		'password' => $request->password
-    	], $request->filled('remember'));
+            'email' => $request->email,
+            'password' => $request->password
+        ], $request->remember);
 
     	if (!$authenticate) {
             $errors = new MessageBag([
                 'email' => [
-                    'These credentials do not match our records.'
+                    trans('auth.failed')
                 ]
             ]);
 
@@ -28,30 +34,35 @@ class AuthController extends Controller
                 'errors' => $errors
             ])->setStatusCode(401);
         }
-
-    	$user = Auth::user();
-		$token = $user->createToken('token')->accessToken;
     	
     	return response()->json([
-    		'authenticate' => $authenticate,
-    		'token' => $token
+    		'token' => $this->getToken(),
     	]);
     }
 
     public function register(Request $request)
     {
-    	$validated = $request->validate([
-    		'name' => 'required|string|max:255',
-    		'email' => 'required|string|email|unique:users',
-    		'password' => 'required|string|min:8|confirmed'
-    	]);
+    	$request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string|min:8|confirmed'
+        ]);
 
-    	$user = new User();
-    	$user->name = $request->name;
-    	$user->email = $request->email;
-    	$user->password = \Hash::make($request->password);
-    	$user->save();
+        $request->merge(['password' => \Hash::make($request->password)]);
 
-    	return $this->login($request);
+    	$user = User::create($request->all());
+
+        Auth::login($user);
+
+    	return response()->json([
+            'token' => $this->getToken()
+        ]); 
+    }
+
+    public function getToken()
+    {
+        $user = Auth::user();
+
+        return $user->createToken(Str::random(40));
     }
 }
