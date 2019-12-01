@@ -1,16 +1,92 @@
 # Exposé
 Guide for my Laravel Applications.
 
-## Table of Contents
-- [Organizing Models](https://github.com/Lavendar77/Expose/tree/organizing-models)
-- [Database Configurations](https://github.com/Lavendar77/Expose/tree/database)
-- [Authentication](https://github.com/Lavendar77/Expose/tree/authentication)
-- [Using Traits](https://github.com/Lavendar77/Expose/tree/laravel-traits)
-- [Switching from Autoincrementing to UUID in Models](https://github.com/Lavendar77/Expose/tree/eloquent-uuid)
-- [Working with Notifications](https://github.com/Lavendar77/Expose/tree/notifications)
-- [Vuex](https://github.com/Lavendar77/Expose/tree/vuex)
-- [Laravel Passport](https://github.com/Lavendar77/Expose/tree/passport)
+## JWT For Laravel 6^
+JSON Web Token - Basically, like Laravel Passport, but minimal.
+> [Documentation](https://jwt-auth.readthedocs.io/en/develop/)
 
-## Tools
-[MarkdownPreview for Sublime Text 3](https://facelessuser.github.io/MarkdownPreview/) 
-: For writing and previewing markdown syntax for the *README.md* file, most especially.
+### Installation
+```bash
+composer require tymon/jwt-auth:^1.0.0-rc.5
+```
+
+### Configuration
+1. Generate the secret key
+```bash
+php artisan jwt:secret
+```
+This will create a `JWT_SECRET` in the `.env` file
+
+2. Add to the `User` model
+```php
+use Tymon\JWTAuth\Contracts\JWTSubject;
+.
+..
+...
+class User extends Authenticatable implements JWTSubject {
+	/**
+	 * Get the identifier that will be stored in the subject claim of the JWT.
+	 *
+	 * @return mixed
+	 */
+	public function getJWTIdentifier()
+	{
+	    return $this->getKey();
+	}
+
+	/**
+	 * Return a key value array, containing any custom claims to be added to the JWT.
+	 *
+	 * @return array
+	 */
+	public function getJWTCustomClaims()
+	{
+	    return [];
+	}
+}
+```
+
+3. Configure Auth Guard
+Inside the `config/auth.php` file,
+```php
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
+
+    'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+        'hash' => false,
+    ],
+],
+```
+
+4. In your `LoginController.php`
+```php
+/**
+ * Get the token array structure.
+ *
+ * @param  string $token
+ *
+ * @return \Illuminate\Http\JsonResponse
+ */
+protected function respondWithToken($token)
+{
+    return response()->json([
+        'access_token' => $token,
+        'token_type'   => 'bearer',
+        'expires_in'   => auth('api')->factory()->getTTL() * 60,
+    ]);
+}
+
+public function login(Request $request)
+{
+	if (! $token = Auth::attempt($credentials)) {
+		// return 401
+	}
+
+	return $this->respondWithToken($token);
+}
+```
