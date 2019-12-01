@@ -90,3 +90,5 @@ public function login(Request $request)
 	return $this->respondWithToken($token);
 }
 ```
+
+# Incomplete yet! Hope to finish soon
