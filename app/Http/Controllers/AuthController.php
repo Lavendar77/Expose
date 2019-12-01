@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use App\Models\User;
 
+use Auth;
+use JWTAuth;
+use App\Models\User;
 use Illuminate\Support\MessageBag;
-use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -18,12 +18,8 @@ class AuthController extends Controller
             'password' => 'required|string|min:8'
         ]);
 
-    	$authenticate = Auth::attempt([
-            'email' => $request->email,
-            'password' => $request->password
-        ], $request->remember);
-
-    	if (!$authenticate) {
+    	$credentials = $request->only('email', 'password');
+        if (! $token = JWTAuth::attempt($credentials)) {
             $errors = new MessageBag([
                 'email' => [
                     trans('auth.failed')
@@ -34,10 +30,8 @@ class AuthController extends Controller
                 'errors' => $errors
             ])->setStatusCode(401);
         }
-    	
-    	return response()->json([
-    		'token' => $this->getToken(),
-    	]);
+
+        return $this->respondWithToken($token);
     }
 
     public function register(Request $request)
@@ -48,21 +42,43 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed'
         ]);
 
-        $request->merge(['password' => \Hash::make($request->password)]);
+        $credentials = $request->only('email', 'password');
 
+        $request->merge(['password' => \Hash::make($request->password)]);
     	$user = User::create($request->all());
 
-        Auth::login($user);
+        if (! $token = JWTAuth::attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
 
-    	return response()->json([
-            'token' => $this->getToken()
-        ]); 
+        return $this->respondWithToken($token);
     }
 
-    public function getToken()
+    /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
     {
-        $user = Auth::user();
+        Auth::guard('api')->logout();
 
-        return $user->createToken(Str::random(40));
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type'   => 'bearer',
+            'expires_in'   => auth('api')->factory()->getTTL() * 60,
+        ]);
     }
 }

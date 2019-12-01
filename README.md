@@ -10,6 +10,7 @@ Guide for my Laravel Applications.
 - [Working with Notifications](https://github.com/Lavendar77/Expose/tree/notifications)
 - [Vuex](https://github.com/Lavendar77/Expose/tree/vuex)
 - [Laravel Passport](https://github.com/Lavendar77/Expose/tree/passport)
+- [JWT](https://github.com/Lavendar77/Expose/tree/jwt)
 
 ## Tools
 [MarkdownPreview for Sublime Text 3](https://facelessuser.github.io/MarkdownPreview/) 
